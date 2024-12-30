@@ -2,6 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 
 import * as logger from "firebase-functions/logger";
 import { ApplicationError } from '../../../domain/errors/application.error';
+import { ApiResponse } from '../../shared/api-response';
+import { CommonConstants } from '../../../constants/general/app.constants';
+import { CodeStatus } from '../../../constants/http/status.constants';
 
 export function errorHandlerMiddleware(
   err: Error,
@@ -11,16 +14,17 @@ export function errorHandlerMiddleware(
 ): void {
   logger.info("errorHandlerMiddleware: ", err)
   if (err instanceof ApplicationError) {
-    res.status(err.statusCode).json({
-      error: err.name,
-      message: err.message,
-      code: err.code,
-    });
+    res.status(err.statusCode).json(
+      ApiResponse.error(err.name,err.message,err.code)
+    );
   } else {
     logger.error('Errror inesperado: :', err);
-    res.status(500).json({
-      error: 'InternalServerError',
-      message: 'Algo ha salido mal!',
-    });
+    res.status(CodeStatus.SERVER_ERROR).json(
+      ApiResponse.error(
+        CommonConstants.INTERNAL_SERVER_ERROR,
+        CommonConstants.INTERNAL_SERVER_ERROR_MSG,
+        CodeStatus.SERVER_ERROR
+      )
+    );
   }
 }

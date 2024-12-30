@@ -1,0 +1,25 @@
+<div>
+  <mat-toolbar color="secondary" class="navbar">
+    <span>Bienvenido: {{userEmail}}</span>
+    <span class="spacer"></span>
+    <button mat-raised-button color="primary" (click)="goLogin()">Ir a login</button>
+  </mat-toolbar>
+
+  <div>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let task of taskList" (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ task.title }}</mat-panel-title>
+          <mat-panel-description>
+            {{ task.description }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+          <p>{{ task.description }}</p>
+          <p>{{ task.state }}</p>
+          <p>{{ task.createdDate }}</p>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

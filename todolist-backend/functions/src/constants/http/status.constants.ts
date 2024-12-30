@@ -1,0 +1,8 @@
+export const CodeStatus = {
+  OK: 200,
+  OK_INSERTED: 201,
+  SERVER_ERROR: 500,
+  NOT_FOUND: 404,
+  BAD_REQUEST: 400,
+  UNAUTORIZED: 401
+}

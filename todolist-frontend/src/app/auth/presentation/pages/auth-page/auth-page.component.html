@@ -1,0 +1,14 @@
+
+<app-register></app-register>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input id="email" formControlName="email" />
+    <app-error-message *ngIf="userForm.get('email')?.touched" [control]="userForm.get('email')"></app-error-message>
+  </div>
+
+  <button type="submit" [disabled]="userForm.invalid">Entrar</button>
+
+</form>

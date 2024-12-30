@@ -1,12 +1,6 @@
-
-import { EmailAlreadyExistsError, NotFoundError, ValidationError } from "../../domain/errors/application.error";
-
+import { EmailAlreadyExistsError, NotFoundError, ValidationError } from '../../domain/errors/application.error';
 
 export class ErrorService {
-  static throwEmailExistsError(message: string): never {
-    throw new EmailAlreadyExistsError(message);
-  }
-
   static throwNotFound(message: string): never {
     throw new NotFoundError(message);
   }
@@ -15,4 +9,7 @@ export class ErrorService {
     throw new ValidationError(message);
   }
 
+  static throwEmailExistsError(message: string):never {
+    throw new EmailAlreadyExistsError(message);
+  }
 }

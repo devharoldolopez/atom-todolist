@@ -1,0 +1,21 @@
+<div class="modal-backdrop" *ngIf="isVisible$ | async" (click)="closeModal()"></div>
+<div class="modal" *ngIf="isVisible$ | async">
+  <div class="modal-header">
+    <h3>Registrar usuario</h3>
+    <button (click)="closeModal()">X</button>
+  </div>
+
+  <form [formGroup]="authRegisterForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input id="email" type="email" formControlName="email" />
+    </div>
+
+    <div class="form-group">
+      <label for="username">Usuario:</label>
+      <input id="username" formControlName="username" />
+    </div>
+  
+    <button type="submit" [disabled]="authRegisterForm.invalid">Registrar</button>
+  </form>
+</div>
