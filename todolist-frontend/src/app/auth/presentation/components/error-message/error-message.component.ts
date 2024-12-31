@@ -10,7 +10,8 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
   styleUrl: './error-message.component.scss'
 })
 export class ErrorMessageComponent {
-  @Input() control: AbstractControl | null = null;
+  @Input()
+  control: AbstractControl | null = null;
 
   getErrorMessage(errors: ValidationErrors | null): string {
     if(!errors) return "";

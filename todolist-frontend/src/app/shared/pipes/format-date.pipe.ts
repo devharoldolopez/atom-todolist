@@ -9,7 +9,7 @@ export class FormatDatePipe implements PipeTransform {
   constructor(private datePipe: DatePipe) {}
 
   transform(value: Date | string): string | null {
-    return this.datePipe.transform(value, 'yyyy-MM-dd');
+    return this.datePipe.transform(value, 'dd/MM/yyyy HH:mm:ss');
   }
 
 }

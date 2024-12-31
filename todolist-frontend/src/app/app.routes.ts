@@ -18,6 +18,6 @@ export const appRoutes: Routes = [
   },
   {
     path: '**',
-    loadComponent: () => import("./shared/component/not-found/not-found.component").then(m => m.NotFoundComponent)
+    loadComponent: () => import("./shared/components/not-found/not-found.component").then(m => m.NotFoundComponent)
   },
 ];

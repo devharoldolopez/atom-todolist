@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RegisterService } from './register.service';
 import { UserAuthUseCase } from '../../../application/use-cases/user-auth-use-case';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { finalize } from 'rxjs';
+import { ModalService } from '../../../../shared/services/modal.service';
+import { FormLogService } from '../../../../shared/services/form-log.service';
+import { User } from '../../../domain/entities/user';
 
 @Component({
   selector: 'app-register',
@@ -16,12 +18,13 @@ import { finalize } from 'rxjs';
 })
 export class RegisterComponent {
   authRegisterForm: FormGroup;
-  isVisible$ = this.registerService.isVisible$;
+  isVisible$ = this.modalService.isVisible$;
 
   constructor(
     private formBuilder: FormBuilder,
-    private registerService: RegisterService,
-    private userAuthUseCase:UserAuthUseCase,
+    private modalService: ModalService<User>,
+    private userAuthUseCase: UserAuthUseCase,
+    private formLogService: FormLogService,
     private router: Router
   ){
     this.authRegisterForm = this.createAuthRegisterForm();
@@ -35,18 +38,18 @@ export class RegisterComponent {
   }
 
   closeModal():void {
-    this.registerService.close();
+    this.modalService.close();
   }
 
   onSubmit():void {
     if(this.authRegisterForm.invalid){
-      this.logValidationErrors();
+      this.formLogService.logValidationErrors(this.authRegisterForm);
       return;
     }
     this.userAuthUseCase.registerUser(this.authRegisterForm.value)
       .pipe(
         finalize(() => {
-          this.registerService.close();
+          this.modalService.close();
         })
       )
       .subscribe({
@@ -65,15 +68,6 @@ export class RegisterComponent {
       });
   }
 
-  private logValidationErrors(): void {
-    Object.keys(this.authRegisterForm.controls).forEach(key => {
-      const controlErrors = this.authRegisterForm.get(key)?.errors;
-      if(controlErrors != null){
-        Object.keys(controlErrors).forEach(keyError => {
-          console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
-        });
-      }
-    });
-  }
+  
 
 }

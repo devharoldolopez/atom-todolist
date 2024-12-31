@@ -6,8 +6,12 @@ import { UserAuthUseCase } from '../../../application/use-cases/user-auth-use-ca
 import { Router } from '@angular/router';
 import { RegisterComponent } from "../../components/register/register.component";
 import { HttpErrorResponse } from '@angular/common/http';
-import { RegisterService } from '../../components/register/register.service';
+import { ModalService } from '../../../../shared/services/modal.service';
 import { MatIconModule } from '@angular/material/icon';
+import { UserErrorsConstants } from '../../../../constants/errors/user-errors.constants';
+import { User } from '../../../domain/entities/user';
+import { CommonConstants } from '../../../../constants/general/app.constants';
+import { FormLogService } from '../../../../shared/services/form-log.service';
 
 
 @Component({
@@ -25,10 +29,10 @@ export class AuthPageComponent {
     private formBuilder: FormBuilder,
     private userAuthUseCase:UserAuthUseCase,
     private router: Router,
-    private registerService: RegisterService,
+    private modalService: ModalService<User>,
+    private formLogService: FormLogService,
   ){
     this.userForm = this.createUserForm();
-    this.registerService.open()
   }
 
   private createUserForm(): FormGroup {
@@ -39,7 +43,7 @@ export class AuthPageComponent {
 
   onSubmit():void {
     if(this.userForm.invalid){
-      this.logValidationErrors();
+      this.formLogService.logValidationErrors(this.userForm);
       return;
     }
 
@@ -55,7 +59,7 @@ export class AuthPageComponent {
         error: (authError:HttpErrorResponse) => {
           console.log("Error en el login:", authError.error);
           if(authError.error.details.internalCode === UserErrorsConstants.USER_NOT_FOUND_EMAIL.internalCode)
-            this.registerService.open();
+            this.modalService.open(CommonConstants.EMPTY_OBJ);
           else
             console.log("Error en el login: ", authError.error.message);
         }
@@ -63,14 +67,4 @@ export class AuthPageComponent {
 
   }
 
-  private logValidationErrors(): void {
-    Object.keys(this.userForm.controls).forEach(key => {
-      const controlErrors = this.userForm.get(key)?.errors;
-      if(controlErrors != null){
-        Object.keys(controlErrors).forEach(keyError => {
-          console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
-        });
-      }
-    });
-  }
 }

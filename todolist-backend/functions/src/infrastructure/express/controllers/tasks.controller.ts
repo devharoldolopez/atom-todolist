@@ -9,6 +9,7 @@ import { Task } from '../../../domain/tasks/tasks.entity';
 import { ResponseConstants } from '../../../constants/http/response.constants';
 import { CommonConstants } from '../../../constants/general/app.constants';
 import { UserTaskRequest } from '../interfaces/user-task-request.interface';
+import { convertFirestoreTimestampToDate } from '../../utils/firestore-utils';
 
 export class TasksController {
   constructor(private readonly tasksUseCase: TasksUseCase) {}
@@ -19,8 +20,13 @@ export class TasksController {
 
     try {
       const tasks = await this.tasksUseCase.getTasksByUser(userId);
+      const tasksResponse:Array<Task> = tasks.map((task) => ({
+        ...task,
+        createdDate: convertFirestoreTimestampToDate(task)
+      }));
+
       res.status(CodeStatus.OK).json(
-        ApiResponse.success<Task[]>(tasks)
+        ApiResponse.success<Task[]>(tasksResponse)
       );
     } catch (error) {
       logger.info("Entro al catch de getTasksByUser controller: ", error)

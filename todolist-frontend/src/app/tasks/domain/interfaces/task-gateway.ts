@@ -6,5 +6,5 @@ export abstract class TaskGateway {
   abstract fetchTasks(user:User): Observable<Task[]>;
   abstract createTask(task: Task): Observable<Task>;
   abstract updateTask(task: Task): Observable<Task>;
-  abstract deleteTask(taskId: number): Observable<void>;
+  abstract deleteTask(taskId: string): Observable<void>;
 }

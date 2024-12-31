@@ -1,3 +1,5 @@
+<app-edit-task [title]="modalTitle"></app-edit-task>
+
 <div class="task-container">
   <div class="task-container__navbar">
     <div class="task-container__navbar-back">
@@ -5,10 +7,9 @@
     </div>
     <div class="task-container__navbar-title">
       <h1>To do List</h1>
-      <span>{{userEmail}}</span>
+      <!-- <span>{{userEmail}}</span> -->
     </div>
   </div>
-
 
   <div class="task-list-container">
     <div class="task-list-container__accordion">
@@ -23,11 +24,11 @@
             <div class="accordion_container--items">
               <p><b>Descripción:</b> {{ task.description }}</p>
               <p><b>Estado: </b>{{ task.state }}</p>
-              <p><b>Creado el: </b>{{ task.createdDate }}</p>
+              <p><b>Creado el: </b>{{ task.createdDate | formatDate}}</p>
             </div>
             
             <div class="accordion__buttons">
-              <button>
+              <button (click)="editTask(task)">
                 <mat-icon>edit</mat-icon>
               </button>
               <button>
@@ -36,7 +37,6 @@
             </div>
           </div>
 
-          
         </mat-expansion-panel>
       </mat-accordion>
     </div>

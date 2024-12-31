@@ -84,6 +84,6 @@ export class FirestoreTasksRepository implements TasksRepository {
   private toDomain(doc: FirebaseFirestore.DocumentSnapshot): Task {
     const data = doc.data();
     if (!data) ErrorService.throwGeneralError(UserErrorsConstants.DOCUMENT_NOT_DEFINED.internalCode, UserErrorsConstants.DOCUMENT_NOT_DEFINED.msg);
-    return new Task(data.title, data.description, data.state, data.createdDate, doc.id);
+    return new Task(data.title, data.description, data.state, data.createdDate, CommonConstants.FIELD_NOT_DEFINED, doc.id);
   }
 }

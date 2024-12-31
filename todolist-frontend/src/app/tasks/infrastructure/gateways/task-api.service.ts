@@ -32,11 +32,11 @@ export class TaskApiService extends TaskGateway {
   }
 
   override updateTask(task: Task) {
-    return this.http.put<Task>(`${this.baseUrl}${TaskEndpoints.updateTask}`, task);
+    return this.http.put<Task>(`${this.baseUrl}${TaskEndpoints.updateTask}${task.id}`, task);
   }
 
-  override deleteTask(taskId: number) {
-    return this.http.delete<void>(`${this.baseUrl}${TaskEndpoints.deleteTask}/${taskId}`);
+  override deleteTask(taskId: string) {
+    return this.http.delete<void>(`${this.baseUrl}${TaskEndpoints.deleteTask}${taskId}`);
   }
 
   private mapToTaskDomain(response: TaskListResponse): Task[] {

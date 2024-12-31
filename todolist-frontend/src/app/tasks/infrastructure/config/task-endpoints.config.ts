@@ -1,6 +1,6 @@
 export const TaskEndpoints = {
   getTasks: '/tasks',
-  createTask: '/create',
-  updateTask: '/update',
-  deleteTask: '/delete',
+  createTask: '/tasks',
+  updateTask: '/tasks/',
+  deleteTask: '/tasks/',
 }
