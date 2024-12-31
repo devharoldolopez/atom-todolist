@@ -10,7 +10,7 @@
 
 .task-container__navbar{
   display: flex;
-  background-image:url('/assets/images/back2.jpg') ;
+  background-image:url('/assets/images/background.jpg') ;
   background-size: cover;
   height: 180px;
   width: 100%;
@@ -153,7 +153,7 @@
   color: $black-color
 }
 .accordion_container--items p b{
-  color:$secondary-color ; 
+  color:$primary-color ; 
 }
 
 .spacer {

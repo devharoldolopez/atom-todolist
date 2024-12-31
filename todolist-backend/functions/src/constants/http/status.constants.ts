@@ -4,5 +4,5 @@ export const CodeStatus = {
   SERVER_ERROR: 500,
   NOT_FOUND: 404,
   BAD_REQUEST: 400,
-  UNAUTORIZED: 401
-}
+  UNAUTORIZED: 401,
+};

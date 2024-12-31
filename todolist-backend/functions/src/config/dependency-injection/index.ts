@@ -1,6 +1,6 @@
-import { createAuthController } from './auth';
-import { createTasksController } from './tasks';
-import { createUserController } from './user';
+import {createAuthController} from "./auth";
+import {createTasksController} from "./tasks";
+import {createUserController} from "./user";
 
 
 export const Assemblers = {
