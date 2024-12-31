@@ -35,10 +35,15 @@ $todolist-frontend-theme: mat.define-light-theme((
 // that you are using.
 @include mat.all-component-themes($todolist-frontend-theme);
 
-@import "assets/styles/theme";
+@import 'styles/variables';
+
+$primary-color: #8AA4E8;
+
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: "Quicksand", serif; }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: "Quicksand", serif; color: $black-color; }
+
+

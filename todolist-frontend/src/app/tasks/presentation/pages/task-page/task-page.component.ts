@@ -8,12 +8,14 @@ import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 @Component({
   selector: 'app-task-page',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatExpansionModule, MatToolbarModule],
+  imports: [CommonModule, MatButtonModule, MatExpansionModule, MatToolbarModule, MatIconModule],
   templateUrl: './task-page.component.html',
   styleUrl: './task-page.component.scss'
 })

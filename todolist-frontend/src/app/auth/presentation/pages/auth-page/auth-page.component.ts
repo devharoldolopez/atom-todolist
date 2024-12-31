@@ -7,11 +7,13 @@ import { Router } from '@angular/router';
 import { RegisterComponent } from "../../components/register/register.component";
 import { HttpErrorResponse } from '@angular/common/http';
 import { RegisterService } from '../../components/register/register.service';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @Component({
   selector: 'app-auth-page',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, ErrorMessageComponent, RegisterComponent],
+  imports: [ReactiveFormsModule, CommonModule, ErrorMessageComponent, RegisterComponent,MatIconModule ],
   templateUrl: './auth-page.component.html',
   styleUrl: './auth-page.component.scss'
 })
@@ -26,6 +28,7 @@ export class AuthPageComponent {
     private registerService: RegisterService,
   ){
     this.userForm = this.createUserForm();
+    this.registerService.open()
   }
 
   private createUserForm(): FormGroup {
