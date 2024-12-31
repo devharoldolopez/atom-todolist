@@ -1,14 +1,22 @@
 
 <app-register></app-register>
 
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input id="email" formControlName="email" />
-    <app-error-message *ngIf="userForm.get('email')?.touched" [control]="userForm.get('email')"></app-error-message>
+<div class="auth-container">
+  <div class="auth-container__item">
+    <form class="auth-container__form"  [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="form-group form-group--items">
+        <img src="assets/images/logo.png" alt="">
+        <h1>Login</h1>
+        <label for="email">E-mail</label>
+        <div class="form-group__form--div">
+          <mat-icon>mail</mat-icon>
+          <input id="email" formControlName="email" placeholder="Escribe tu correo electrónico"/>
+        </div>
+        
+        <app-error-message *ngIf="userForm.get('email')?.touched" [control]="userForm.get('email')"></app-error-message>
+      </div>
+      <button class="btn-primary" type="submit" [disabled]="userForm.invalid">Entrar</button>
+    </form>
   </div>
 
-  <button type="submit" [disabled]="userForm.invalid">Entrar</button>
-
-</form>
+</div>

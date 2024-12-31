@@ -1,0 +1,143 @@
+@import 'styles/variables';
+
+.auth-container{
+    background: $terciary-color;
+    background: linear-gradient(45deg, rgba(113,247,235,1) 21%, rgba(0,163,255,1) 79%);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-container__item{
+    width:90%;
+    background-color: white;
+    border-radius: 10px;
+    height: auto;
+    padding: 40px 30px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-primary{
+    background: $terciary-color;
+    background: linear-gradient(45deg, rgba(113,247,235,1) 21%, rgba(0,163,255,1) 79%);
+    padding: 15px;
+    width: 100%;
+    font-size: 20px;
+    color: white;
+    font-weight: 500;
+    border: solid 1px white;
+    border-radius: 30px;
+    font-family: "Quicksand", serif;
+    margin-top: 50px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.btn-primary:hover{
+    background: $terciary-color;
+}
+
+.auth-container__form{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-around;
+    height: 80%;
+    width: 100%;
+}
+
+.form-group--items{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.form-group--items img{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-around;
+    width: 25%;
+}
+
+.form-group__form--div{
+    width: 100%;
+    display: flex;
+    border-bottom: solid 1px $gray-color;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.form-group--items label{
+    width: 100%;
+}
+
+.form-group--items input{
+    width: 100%;
+    border: none;
+    height: 40px;
+
+}
+
+.form-group--items input:placeholder{
+    color: $gray-color;
+}
+
+.form-group--items h1{
+    font-family: "Autour One", serif;
+}
+
+.form-group__form--div mat-icon{
+    color: $gray-color;
+    padding-right: 10px;
+
+}
+
+.form-group__form--div input:focus{
+    outline: none;
+}
+
+.form-group--items:focus{
+    border: none;
+    border-bottom: solid 1px #61d7de;
+
+
+}
+
+
+
+@media (min-width: 768px) {
+    .auth-container__item{
+        width: 50%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .auth-container__item{
+        width: 45%;
+    }
+}
+
+@media (min-width: 1440px) {
+    .auth-container__item{
+        width: 30%;
+    }
+}
+
+@media (min-width: 1920px) {
+
+    .form-group--items label{
+        font-size: 18px;
+    }
+
+    .auth-container__item{
+        width: 20%;
+    }
+}
