@@ -4,6 +4,6 @@ export class Task {
     public title: string,
     public description: string,
     public state: string,
-    public createdDate: string,
+    public createdDate: Date,
   ) {}
 }

@@ -40,7 +40,7 @@ export class UserController {
   async insertUser(req: Request, res: Response, next: NextFunction) {
     logger.info('Entro controller insertUser');
     try{
-      const userParam = new User(req.body.name, req.body.email);
+      const userParam = new User(req.body.username, req.body.email);
       const user = await this.usersUseCase.insertUser(userParam);
       res.status(CodeStatus.OK_INSERTED).json(
         ApiResponse.success<User>(user, ResponseConstants.USER_CREATED_SUCCESS)
@@ -55,7 +55,7 @@ export class UserController {
     const userId = req.params.userId;
     logger.info('Entro controller updateUser: ', userId);
     try{
-      const userParam = new User(req.body.name, req.body.email, userId);
+      const userParam = new User(req.body.username, req.body.email, userId);
       const user = await this.usersUseCase.updateUser(userParam);
       res.status(CodeStatus.OK).json(
         ApiResponse.success<User>(user, ResponseConstants.USER_UPDATED_SUCCESS)

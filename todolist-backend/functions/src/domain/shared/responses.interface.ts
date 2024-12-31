@@ -8,9 +8,8 @@ export interface SuccessResponse<T> {
 
 export interface ErrorResponse {
   status: string;
-  error: {
-    code: string;
+  details: {
+    internalCode: number;
     message: string;
-    details?: any;
   };
 }

@@ -15,16 +15,12 @@ export class UserAuthUseCase {
     return this.authGateway.doLogin(user)
   }
 
-  getUserEmailAuth(): string {
-    return this.authGateway.getAuthEmail();
+  getLocalUserAuth(): User | null {
+    return this.authGateway.getAuthLocalData();
   }
 
-  setAuthEmail(email: string): void {
-    this.authGateway.setAuthEmail(email);
-  }
-
-  getAuthEmail(): string {
-    return this.authGateway.getAuthEmail();
+  setLocalUserAuth(user: User): void {
+    this.authGateway.setAuthLocalData(user);
   }
 
   registerUser(user:User): Observable<User> {

@@ -7,6 +7,7 @@ import { Task } from '../../domain/tasks/tasks.entity';
 import { ErrorService } from "../services/error.service";
 
 
+
 export class FirestoreTasksRepository implements TasksRepository {
 
   private readonly tasksCollection = FirebaseConfig.getFirestore().collection(CommonConstants.TASKS_COLLECTION);
@@ -20,7 +21,7 @@ export class FirestoreTasksRepository implements TasksRepository {
     logger.info('tasksSnapshot: ', tasksSnapshot)
 
     if(tasksSnapshot.empty)
-      ErrorService.throwNotFound(UserErrorsConstants.TASKS_NOT_FOUND)
+      ErrorService.throwNotFound(UserErrorsConstants.TASKS_NOT_FOUND.internalCode, UserErrorsConstants.TASKS_NOT_FOUND.msg)
 
     return tasksSnapshot.docs.map(doc => this.toDomain(doc));
     
@@ -30,7 +31,7 @@ export class FirestoreTasksRepository implements TasksRepository {
     logger.info('Entro a insertUsers: ', userId);
     logger.info('task value: ', task)
 
-    const {title, description, state} = task; 
+    const {title, description, state} = task;
 
     const newTask = {
       title,
@@ -49,7 +50,7 @@ export class FirestoreTasksRepository implements TasksRepository {
     logger.info('Entro a updateTask: ', task);
 
     if (!task.id) {
-      ErrorService.throwValidationError(UserErrorsConstants.TASK_ID_FIELD_REQUIRED)
+      ErrorService.throwValidationError(UserErrorsConstants.TASK_ID_FIELD_REQUIRED.internalCode, UserErrorsConstants.TASK_ID_FIELD_REQUIRED.msg)
     }
 
     logger.info('Entro a updateTask: ', task.id);
@@ -57,7 +58,7 @@ export class FirestoreTasksRepository implements TasksRepository {
     const taskDoc = await taskDocRef.get();
 
     if(!taskDoc.exists)
-      ErrorService.throwNotFound(UserErrorsConstants.TASK_NOT_FOUND)
+      ErrorService.throwNotFound(UserErrorsConstants.TASK_NOT_FOUND.internalCode, UserErrorsConstants.TASK_NOT_FOUND.msg)
 
     const {title, description, state} = task; 
 
@@ -75,14 +76,14 @@ export class FirestoreTasksRepository implements TasksRepository {
     const docRef = this.tasksCollection.doc(id);
     const doc = await docRef.get();
     if(!doc.exists)
-      throw new Error(UserErrorsConstants.TASKS_DELETED_NOT_EXISTS)
+      ErrorService.throwGeneralError(UserErrorsConstants.TASKS_DELETED_NOT_EXISTS.internalCode, UserErrorsConstants.TASKS_DELETED_NOT_EXISTS.msg)
 
     await docRef.delete();
   }
 
   private toDomain(doc: FirebaseFirestore.DocumentSnapshot): Task {
     const data = doc.data();
-    if (!data) throw new Error(UserErrorsConstants.DOCUMENT_NOT_DEFINED);
+    if (!data) ErrorService.throwGeneralError(UserErrorsConstants.DOCUMENT_NOT_DEFINED.internalCode, UserErrorsConstants.DOCUMENT_NOT_DEFINED.msg);
     return new Task(data.title, data.description, data.state, data.createdDate, doc.id);
   }
 }

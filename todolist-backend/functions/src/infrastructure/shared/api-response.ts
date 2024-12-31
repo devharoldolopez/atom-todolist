@@ -12,13 +12,12 @@ export class ApiResponse {
     };
   }
 
-  static error(code: string, message: string, details?: any): ErrorResponse {
+  static error(internalCode: number, message: string): ErrorResponse {
     return {
       status: CommonConstants.STATUS_ERROR,
-      error: {
-        code,
+      details: {
+        internalCode,
         message,
-        details,
       },
     };
   }

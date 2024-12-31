@@ -1,6 +1,5 @@
 <div>
   <mat-toolbar color="secondary" class="navbar">
-    <span>Bienvenido: {{userEmail}}</span>
     <span class="spacer"></span>
     <button mat-raised-button color="primary" (click)="goLogin()">Ir a login</button>
   </mat-toolbar>
@@ -17,7 +16,7 @@
         <div>
           <p>{{ task.description }}</p>
           <p>{{ task.state }}</p>
-          <p>{{ task.createdDate }}</p>
+          <p>{{ task.createdDate | formatDate }}</p>
         </div>
       </mat-expansion-panel>
     </mat-accordion>

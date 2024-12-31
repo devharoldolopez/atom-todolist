@@ -51,7 +51,10 @@ export class RegisterComponent {
       )
       .subscribe({
         next: (user) => {
-          this.userAuthUseCase.setAuthEmail(user.email);
+
+          console.log("Usuario registrado register cmp: ", user);
+
+          this.userAuthUseCase.setLocalUserAuth(user);
           this.authRegisterForm.reset();
           this.router.navigate(['/tasks']);
         },

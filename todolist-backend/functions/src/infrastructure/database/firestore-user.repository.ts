@@ -27,7 +27,7 @@ export class FirestoreUserRepository implements UserRepository {
     logger.info('snapshot::', snapshot.docs);
 
     if(snapshot.empty)
-      ErrorService.throwNotFound(UserErrorsConstants.USER_NOT_FOUND_EMAIL)
+      ErrorService.throwNotFound(UserErrorsConstants.USER_NOT_FOUND_EMAIL.internalCode, UserErrorsConstants.USER_NOT_FOUND_EMAIL.msg)
 
     return this.toDomain(snapshot.docs[0]);
   }
@@ -37,10 +37,10 @@ export class FirestoreUserRepository implements UserRepository {
 
     const isValidEmail = await this.validatorService.isValidToInsert(CommonConstants.EMAIL_FIELD, user.email, false);
     if(!isValidEmail)
-      ErrorService.throwEmailExistsError(UserErrorsConstants.EMAIL_ALREADY_EXISTS);
+      ErrorService.throwEmailExistsError(UserErrorsConstants.EMAIL_ALREADY_EXISTS.internalCode, UserErrorsConstants.EMAIL_ALREADY_EXISTS.msg);
 
     const docRef = await this.collection.add({
-      name: user.name,
+      name: user.username,
       email: user.email
     });
 
@@ -51,17 +51,17 @@ export class FirestoreUserRepository implements UserRepository {
     logger.info('Entro a insertUsers: ', user.id);
 
     if (!user.id) {
-      ErrorService.throwValidationError(UserErrorsConstants.USER_ID_FIELD_REQUIRED)
+      ErrorService.throwValidationError(UserErrorsConstants.USER_ID_FIELD_REQUIRED.internalCode, UserErrorsConstants.USER_ID_FIELD_REQUIRED.msg)
     }
 
     const docRef = this.collection.doc(user.id as string);
     const doc = await docRef.get();
 
     if(!doc.exists)
-      ErrorService.throwNotFound(UserErrorsConstants.USER_UPDATED_NOT_EXISTS)
+      ErrorService.throwNotFound(UserErrorsConstants.USER_UPDATED_NOT_EXISTS.internalCode, UserErrorsConstants.USER_UPDATED_NOT_EXISTS.msg)
 
     await docRef.update({
-      name: user.name,
+      name: user.username,
       email: user.email
     });
 
@@ -73,14 +73,14 @@ export class FirestoreUserRepository implements UserRepository {
     const docRef = this.collection.doc(id);
     const doc = await docRef.get();
     if(!doc.exists)
-      throw new Error(UserErrorsConstants.USER_DELETED_NOT_EXISTS)
+      ErrorService.throwGeneralError(UserErrorsConstants.USER_DELETED_NOT_EXISTS.internalCode, UserErrorsConstants.USER_DELETED_NOT_EXISTS.msg)
 
     await docRef.delete();
   }
 
   private toDomain(doc: FirebaseFirestore.DocumentSnapshot): User {
     const data = doc.data();
-    if (!data) throw new Error(UserErrorsConstants.DOCUMENT_NOT_DEFINED);
-    return new User(data.name, data.email, doc.id);
+    if (!data) ErrorService.throwGeneralError(UserErrorsConstants.DOCUMENT_NOT_DEFINED.internalCode, UserErrorsConstants.DOCUMENT_NOT_DEFINED.msg);
+    return new User(data.username, data.email, doc.id);
   }
 }

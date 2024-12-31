@@ -1,6 +1,6 @@
 export class ApplicationError extends Error {
   constructor(
-    public readonly code: string,
+    public readonly internalCode: number,
     public readonly statusCode: number,
     message: string
   ) {
@@ -9,19 +9,26 @@ export class ApplicationError extends Error {
 }
 
 export class NotFoundError extends ApplicationError {
-  constructor(message: string) {
-    super('NOT_FOUND', 404, message);
+  constructor(internalCode:number, message: string) {
+    super(internalCode, 404, message);
   }
 }
 
 export class ValidationError extends ApplicationError {
-  constructor(message: string) {
-    super('VALIDATION_ERROR', 400, message);
+  constructor(internalCode:number, message: string) {
+    super(internalCode, 400, message);
   }
 }
 
 export class EmailAlreadyExistsError extends ApplicationError {
-  constructor(message: string) {
-    super('EMAIL_ALREADY_EXISTS', 400, message);
+  constructor(internalCode:number, message: string) {
+    super(internalCode, 400, message);
+  }
+}
+
+
+export class GeneralError extends ApplicationError {
+  constructor(internalCode:number, message: string) {
+    super(internalCode, 500, message);
   }
 }

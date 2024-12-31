@@ -8,13 +8,15 @@ import { TasksUseCase } from '../../../application/tasks/usecases/tasks.usecase'
 import { Task } from '../../../domain/tasks/tasks.entity';
 import { ResponseConstants } from '../../../constants/http/response.constants';
 import { CommonConstants } from '../../../constants/general/app.constants';
+import { UserTaskRequest } from '../interfaces/user-task-request.interface';
 
 export class TasksController {
   constructor(private readonly tasksUseCase: TasksUseCase) {}
 
-  async getTasksByUser(req: Request, res: Response, next: NextFunction) {
-    const userId = req.params.userId;
+  async getTasksByUser(req: UserTaskRequest, res: Response, next: NextFunction) {
+    const userId:string = req.query.id;
     logger.info('Entro controller getTasksByUser: ', userId);
+
     try {
       const tasks = await this.tasksUseCase.getTasksByUser(userId);
       res.status(CodeStatus.OK).json(

@@ -15,15 +15,14 @@ export function errorHandlerMiddleware(
   logger.info("errorHandlerMiddleware: ", err)
   if (err instanceof ApplicationError) {
     res.status(err.statusCode).json(
-      ApiResponse.error(err.name,err.message,err.code)
+      ApiResponse.error(err.internalCode,err.message)
     );
   } else {
-    logger.error('Errror inesperado: :', err);
+    logger.error('Error inesperado: :', err);
     res.status(CodeStatus.SERVER_ERROR).json(
       ApiResponse.error(
         CommonConstants.INTERNAL_SERVER_ERROR,
-        CommonConstants.INTERNAL_SERVER_ERROR_MSG,
-        CodeStatus.SERVER_ERROR
+        CommonConstants.INTERNAL_SERVER_ERROR_MSG
       )
     );
   }
