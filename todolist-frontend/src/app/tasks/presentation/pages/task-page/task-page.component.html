@@ -1,4 +1,4 @@
-<app-edit-task [title]="modalTitle"></app-edit-task>
+<app-task-modal (finishAction)="finishAction($event)" [title]="modalTitle"></app-task-modal>
 
 <div class="task-container">
   <div class="task-container__navbar">
@@ -7,18 +7,21 @@
     </div>
     <div class="task-container__navbar-title">
       <h1>To do List</h1>
-      <!-- <span>{{userEmail}}</span> -->
+      <span>{{localUser.email}}</span>
     </div>
   </div>
+
+  <h2>Tareas pendientes</h2>
 
   <div class="task-list-container">
     <div class="task-list-container__accordion">
       <mat-accordion >
-        <mat-expansion-panel *ngFor="let task of taskList" (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+        <mat-expansion-panel *ngFor="let task of taskListPending" (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
           <mat-expansion-panel-header class="accordion_title--color">
-            <mat-panel-title class="accordion__title ">{{ task.title }}</mat-panel-title>
-
-
+            <mat-panel-title class="accordion__title ">
+              {{ task.title }}
+              <mat-checkbox [checked]="evaluateStatus(task.state)" (change)="changeTaskStatus(task, $event.checked)" (click)="$event.stopPropagation()"></mat-checkbox>
+            </mat-panel-title>
           </mat-expansion-panel-header>
           <div class="accordion_container">
             <div class="accordion_container--items">
@@ -31,7 +34,41 @@
               <button (click)="editTask(task)">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button>
+              <button (click)="deleteTask(task.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+
+  <h2>Tareas completadas</h2>
+
+  <div class="task-list-container">
+    <div class="task-list-container__accordion">
+      <mat-accordion >
+        <mat-expansion-panel *ngFor="let task of taskListCompleted" (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+          <mat-expansion-panel-header class="accordion_title--color">
+            <mat-panel-title class="accordion__title ">
+              {{ task.title }}
+              <mat-checkbox [checked]="evaluateStatus(task.state)" (change)="changeTaskStatus(task, $event.checked)" (click)="$event.stopPropagation()"></mat-checkbox>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="accordion_container">
+            <div class="accordion_container--items">
+              <p><b>Descripción:</b> {{ task.description }}</p>
+              <p><b>Estado: </b>{{ task.state }}</p>
+              <p><b>Creado el: </b>{{ task.createdDate | formatDate}}</p>
+            </div>
+            
+            <div class="accordion__buttons">
+              <button (click)="editTask(task)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button (click)="deleteTask(task.id)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
@@ -43,3 +80,5 @@
   </div>
 
 </div>
+
+<button (click)="createTask()">Agregar tarea</button>

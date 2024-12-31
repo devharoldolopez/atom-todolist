@@ -10,15 +10,19 @@ import { User } from "../../../auth/domain/entities/user";
 export class TasksUseCase {
   constructor(private taskGateway: TaskGateway) {}
 
-  getAllTasks(user:User): Observable<Task[]> {
+  getAllTasks(user: User): Observable<Task[]> {
     return this.taskGateway.fetchTasks(user)
+  }
+
+  createTask(task: Task): Observable<Task> {
+    return this.taskGateway.createTask(task)
   }
 
   updateTask(task: Task): Observable<Task> {
     return this.taskGateway.updateTask(task)
   }
 
-  deleteTask(taskId: string): Observable<void> {
+  deleteTask(taskId: string): Observable<boolean> {
     return this.taskGateway.deleteTask(taskId)
   }
 

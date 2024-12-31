@@ -17,7 +17,7 @@ import { FormLogService } from '../../../../shared/services/form-log.service';
 @Component({
   selector: 'app-auth-page',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, ErrorMessageComponent, RegisterComponent,MatIconModule ],
+  imports: [ReactiveFormsModule, CommonModule, ErrorMessageComponent, RegisterComponent, MatIconModule],
   templateUrl: './auth-page.component.html',
   styleUrl: './auth-page.component.scss'
 })

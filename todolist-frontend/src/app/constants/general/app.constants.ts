@@ -3,7 +3,16 @@ export const CommonConstants = {
   EMPTY_OBJ_STR : '{}',
   EMPTY_STR: '',
   EMPTY_OBJ: null,
+  EMPTY_TASK: null,
+  FALSE_VALUE: false,
+  TRUE_VALUE: true,
   NOT_DEFINED_USER: 'notDefined',
   ID_USER_QUERY_PARAM: '?id=',
-  MODAL_EDIT_TITLE: 'Editar tarea'
+  MODAL_EDIT_TASK_TITLE: 'Editar tarea',
+  MODAL_CREATE_TASK_TITLE: 'Nueva tarea',
+  STATE_PENDING: 'PENDING',
+  STATE_COMPLETED: 'COMPLETED',
+  SUCCESS_RESPONSE: 'success',
+  UPDATE_SUCCESSFUL_MSG: 'Tarea editada con éxito',
+  INSERT_SUCCESSFUL_MSG: 'Tarea creada con éxito',
 }
