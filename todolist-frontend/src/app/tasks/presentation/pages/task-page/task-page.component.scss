@@ -6,66 +6,83 @@
   justify-content: center;
   align-items: center;
   flex-flow: column nowrap;
-}
 
-.task-container__navbar{
-  display: flex;
-  background-image:url('/assets/images/background.jpg') ;
-  background-size: cover;
-  height: 180px;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column nowrap;
-  margin-bottom: 40px;
-  border-bottom-right-radius: 30px;
-  border-bottom-left-radius: 30px;
+  &__img{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
 
-}
+    & h2{
+      width: 90%;
+      text-align: center;
+    }
 
-.task-container__navbar-back{
-  width: 100%;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-}
+    &--image{
+      width: 50%;
+      margin-top: 20px;
+    }
 
+  }
 
-.task-container__navbar-back button{
-  background-color: $secondary-color;
-  padding: 10px 15px;
-  border-radius: 30px;
-  border: solid 1px $secondary-color;
-  color: white;
-  font-family: "Quicksand", serif;
-  margin-right: 15px;
-}
+  &__navbar{
+    display: flex;
+    background-image:url('/assets/images/back.jpg') ;
+    background-size: cover;
+    height: 200px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+    margin-bottom: 40px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px; 
+  }
 
-.task-container__navbar-back button:hover{
-  background-color: $terciary-color;
+  &__navbar-back{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
 
-}
+    & button{
+      background-color: $terciary-color;
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: solid 1px $terciary-color;
+      color: $black-color;
+      font-family: "Quicksand", serif;
+      margin-right: 15px;
+      font-weight: 600;
 
-.task-container__navbar-title{
-  width: 100%;
-  color:white;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: start;
-  justify-content: space-around;
-  height: 90px;
-  box-sizing: border-box;
-  margin-left: 30px;
-}
+      &:hover{
+        background-color: $terciary-color;
+      }
+    }
+  }
 
-.task-container__navbar-title h1{
-  margin-bottom: 0px;
-  font-family: "Autour One", serif;
-}
+  &__navbar-title{
+    width: 100%;
+    color:white;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: start;
+    justify-content: space-around;
+    height: 90px;
+    box-sizing: border-box;
+    margin-left: 40px;
 
-.task-container__navbar-title span{
-  font-size: 12px;
-  margin-left: 80px;
+    & h1{
+      margin-bottom: 0px;
+      font-family: "Autour One", serif;
+    }
+
+    & span{
+      font-size: 12px;
+      margin-left: 80px;
+    }
+  }
 }
 
 .task-list-container{
@@ -73,33 +90,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
 
-.task-list-container__accordion{
-  width: 90%;
-}
-
-.accordion__title{
-  font-family: "Quicksand", serif; 
-  font-weight: 600;
-}
-
-.accordion__description{
-  font-family: "Quicksand", serif; 
-  font-weight: 200;
-  color: $black-color;
-  font-size: 12px;
-}
-
-.separator {
-  margin:  10px;
-  border: solid 1px #ccc;
-  width: 100%;
-}
-.accordion_title--color{
-  background-color: #EEF2FC;
-  margin-bottom: 20px;
-  border: solid 1px $secondary-color;
+  &__accordion{
+    width: 90%;
+  }
 }
 
 .task-container .task-list-container .task-list-container__accordion mat-expansion-panel{
@@ -107,55 +101,169 @@
   border-radius: 20px;
 }
 
-.accordion__buttons{
-  width: 100%;
-  display: flex;
+.accordion{
+  &__title{
+    font-family: "Quicksand", serif; 
+    font-weight: 600;
+  
+    &--color{
+      background-color: #EEF2FC;
+      margin-bottom: 20px;
+      border: solid 1px $secondary-color;
+      color: $black-color;
+    }
+  }
 
-  justify-content: center;
-  align-items: center;
-  column-gap: 30px;
+  &__description{
+    font-family: "Quicksand", serif; 
+    font-weight: 200;
+    color: $black-color;
+    font-size: 12px;
+  }
+
+  &__buttons{
+    width: 100%;
+    display: flex;
+  
+    justify-content: center;
+    align-items: center;
+    column-gap: 30px;
+  
+    & button{
+      width: 40px;
+      background-color: $primary-color;
+      border: solid 1px $primary-color;
+      border-radius: 2px;
+      padding: 5px;
+      cursor: pointer;
+      
+    }
+  
+    & button:hover{
+      background-color: $secondary-color;
+      border-color: $secondary-color;
+    }
+  
+    & button mat-icon{
+      font-size: 20px;
+      text-align: center;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 3px;
+    }
+  }
+
+  &_container{
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-flow: column nowrap;
+  
+    &--items{
+      font-family: "Quicksand", serif; 
+      color: $black-color
+    }
+  
+    &--items p b{
+      color:$primary-color ; 
+    }
+  }
+}
+
+.task-list{
+  &__add-task-btn{
+    border: solid 1px $terciary-color;
+    background-color: $terciary-color;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+    padding: 0;
+    margin: 0;
+  
+    & mat-icon{
+      color: white;
+      font-size: 40px;
+      height: 40px;
+      width: 40px;
+    }
+  }
+
+  &__btn--create-task{
+    position: fixed;
+    bottom: 100px;
+    right: 35px;
+    z-index: 10;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .task-list-container{
+      width: 80%;
+  }
+
+  .task-container__img--image{
+    width: 40%;
+    margin-top: 40px;
+  }
+
+  .accordion__title{
+    font-size: 16px;
+  }
+
+  .accordion_container--items{
+    font-size: 16px;
+  }
+
+  .task-container__navbar-title h1{
+    font-size: 40px;
+  }
+
+  .task-container__navbar-title span{
+    font-size: 16px;
+  }
+
+  .task-container__navbar-title button{
+    padding: 10px 25px;
+  }
 
 }
 
-.accordion__buttons button{
-  width: 40px;
-  background-color: $primary-color;
-  border: solid 1px $primary-color;
-  border-radius: 2px;
-  padding: 5px;
-  cursor: pointer;
+@media (min-width: 1024px) {
+  .task-list-container{
+    width: 70%;
 }
 
-
-.accordion__buttons button:hover{
-  background-color: $secondary-color;
-  border-color: $secondary-color;
+.task-container__img--image{
+  width: 35%;
+  margin-top: 40px;
 }
 
-.accordion__buttons button mat-icon{
-  font-size: 20px;
-  text-align: center;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.accordion_container{
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  flex-flow: column nowrap;
+@media (min-width: 1440px) {
+  .task-list-container{
+    width: 60%;
+  }
+  .task-container__img--image{
+    width: 30%;
+    margin-top: 40px;
+  }
+
 }
 
-.accordion_container--items{
-  font-family: "Quicksand", serif; 
-  color: $black-color
-}
-.accordion_container--items p b{
-  color:$primary-color ; 
-}
+@media (min-width: 1920px) {
+  .task-list-container{
+    width: 50%;
+  }
+  .task-container__img--image{
+    width: 25%;
+    margin-top: 40px;
+  }
 
-.spacer {
-  flex: 1 1 auto;
 }

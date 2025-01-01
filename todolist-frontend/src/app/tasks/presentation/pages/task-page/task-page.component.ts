@@ -116,4 +116,12 @@ export class TaskPageComponent implements OnInit {
     return CommonConstants.STATE_COMPLETED === status;
   }
 
+  verifyTasks() {
+    return this.taskListCompleted?.length === CommonConstants.ZERO && this.taskListPending?.length === CommonConstants.ZERO
+  }
+
+  evaluateStateTask(state:string) {
+    return CommonConstants.STATE_COMPLETED === state ? CommonConstants.STATE_COMPLETED_MSG : CommonConstants.STATE_PENDING_MSG;
+  }
+
 }

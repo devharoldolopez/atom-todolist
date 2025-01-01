@@ -8,19 +8,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    &__item{
+        width:90%;
+        background-color: white;
+        border-radius: 10px;
+        height: auto;
+        padding: 40px 30px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
 }
 
-.auth-container__item{
-    width:90%;
-    background-color: white;
-    border-radius: 10px;
-    height: auto;
-    padding: 40px 30px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 
 .btn-primary{
     background: $terciary-color;
@@ -36,11 +39,12 @@
     margin-top: 50px;
     margin-bottom: 15px;
     cursor: pointer;
+
+    &:hover{
+        background: $terciary-color;
+    }
 }
 
-.btn-primary:hover{
-    background: $terciary-color;
-}
 
 .auth-container__form{
     display: flex;
@@ -57,59 +61,63 @@
     align-items: center;
     justify-content: space-around;
     width: 100%;
-}
 
-.form-group--items img{
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: space-around;
-    width: 25%;
-}
+    & img{
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: space-around;
+        width: 25%;
+    }
 
-.form-group__form--div{
-    width: 100%;
-    display: flex;
-    border-bottom: solid 1px $gray-color;
-    align-items: center;
-    padding-top: 10px;
-}
+    & label{
+        width: 100%;
+    }
 
-.form-group--items label{
-    width: 100%;
-}
+    & input{
+        width: 100%;
+        border: none;
+        height: 40px;
+    
+        &::placeholder{
+            color: $gray-color;
+        }
+    }
 
-.form-group--items input{
-    width: 100%;
-    border: none;
-    height: 40px;
+    & h1{
+        font-family: "Autour One", serif;
+    }
 
-}
-
-.form-group--items input:placeholder{
-    color: $gray-color;
-}
-
-.form-group--items h1{
-    font-family: "Autour One", serif;
-}
-
-.form-group__form--div mat-icon{
-    color: $gray-color;
-    padding-right: 10px;
+    &:focus{
+        border: none;
+        border-bottom: solid 1px #61d7de;
+    }
 
 }
 
-.form-group__form--div input:focus{
-    outline: none;
+
+
+.form-group__form{
+    &--div mat-icon{
+        color: $gray-color;
+        padding-right: 10px;
+    }
+
+    &--div input:focus{
+        outline: none;
+    }
+
+    &--div{
+        width: 100%;
+        display: flex;
+        border-bottom: solid 1px $gray-color;
+        align-items: center;
+        padding-top: 10px;
+    }
+
 }
 
-.form-group--items:focus{
-    border: none;
-    border-bottom: solid 1px #61d7de;
 
-
-}
 
 
 
