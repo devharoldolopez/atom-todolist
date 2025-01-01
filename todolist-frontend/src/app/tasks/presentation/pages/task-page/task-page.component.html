@@ -11,74 +11,87 @@
     </div>
   </div>
 
-  <h2>Tareas pendientes</h2>
-
-  <div class="task-list-container">
-    <div class="task-list-container__accordion">
-      <mat-accordion >
-        <mat-expansion-panel *ngFor="let task of taskListPending" (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-          <mat-expansion-panel-header class="accordion_title--color">
-            <mat-panel-title class="accordion__title ">
-              {{ task.title }}
-              <mat-checkbox [checked]="evaluateStatus(task.state)" (change)="changeTaskStatus(task, $event.checked)" (click)="$event.stopPropagation()"></mat-checkbox>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <div class="accordion_container">
-            <div class="accordion_container--items">
-              <p><b>Descripción:</b> {{ task.description }}</p>
-              <p><b>Estado: </b>{{ task.state }}</p>
-              <p><b>Creado el: </b>{{ task.createdDate | formatDate}}</p>
-            </div>
-            
-            <div class="accordion__buttons">
-              <button (click)="editTask(task)">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button (click)="deleteTask(task.id)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
-          </div>
-
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
+  <div class="task-container__img" *ngIf="verifyTasks()">
+    <h2>Aún no tienes tareas, agrega una!</h2>
+    <img class="task-container__img--image" src="assets/images/add-task.svg" alt="no hay tareas creadas">
   </div>
+  
 
-  <h2>Tareas completadas</h2>
+  <ng-container *ngIf="taskListPending?.length !== 0">
+    <h2>Tareas pendientes</h2>
 
-  <div class="task-list-container">
-    <div class="task-list-container__accordion">
-      <mat-accordion >
-        <mat-expansion-panel *ngFor="let task of taskListCompleted" (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-          <mat-expansion-panel-header class="accordion_title--color">
-            <mat-panel-title class="accordion__title ">
-              {{ task.title }}
-              <mat-checkbox [checked]="evaluateStatus(task.state)" (change)="changeTaskStatus(task, $event.checked)" (click)="$event.stopPropagation()"></mat-checkbox>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <div class="accordion_container">
-            <div class="accordion_container--items">
-              <p><b>Descripción:</b> {{ task.description }}</p>
-              <p><b>Estado: </b>{{ task.state }}</p>
-              <p><b>Creado el: </b>{{ task.createdDate | formatDate}}</p>
+    <div class="task-list-container">
+      <div class="task-list-container__accordion">
+        <mat-accordion >
+          <mat-expansion-panel *ngFor="let task of taskListPending" (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+            <mat-expansion-panel-header class="accordion__title--color">
+              <mat-panel-title class="accordion__title ">
+                <mat-checkbox [checked]="evaluateStatus(task.state)" (change)="changeTaskStatus(task, $event.checked)" (click)="$event.stopPropagation()"></mat-checkbox>
+                {{ task.title }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="accordion_container">
+              <div class="accordion_container--items">
+                <p><b>Descripción:</b> {{ task.description }}</p>
+                <p><b>Estado: </b>{{ evaluateStateTask(task.state) }}</p>
+                <p><b>Creado el: </b>{{ task.createdDate | formatDate}}</p>
+              </div>
+              
+              <div class="accordion__buttons">
+                <button (click)="editTask(task)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button (click)="deleteTask(task.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
             </div>
-            
-            <div class="accordion__buttons">
-              <button (click)="editTask(task)">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button (click)="deleteTask(task.id)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
-          </div>
 
-        </mat-expansion-panel>
-      </mat-accordion>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
     </div>
-  </div>
+  </ng-container>
+
+  <ng-container *ngIf="taskListCompleted?.length !== 0">
+    <h2>Tareas completadas</h2>
+
+    <div class="task-list-container">
+      <div class="task-list-container__accordion">
+        <mat-accordion >
+          <mat-expansion-panel *ngFor="let task of taskListCompleted" (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+            <mat-expansion-panel-header class="accordion__title--color">
+              <mat-panel-title class="accordion__title ">
+                <mat-checkbox [checked]="evaluateStatus(task.state)" (change)="changeTaskStatus(task, $event.checked)" (click)="$event.stopPropagation()"></mat-checkbox>
+                {{ task.title }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="accordion_container">
+              <div class="accordion_container--items">
+                <p><b>Descripción:</b> {{ task.description }}</p>
+                <p><b>Estado: </b>{{ evaluateStateTask(task.state) }}</p>
+                <p><b>Creado el: </b>{{ task.createdDate | formatDate}}</p>
+              </div>
+              
+              <div class="accordion__buttons">
+                <button (click)="editTask(task)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button (click)="deleteTask(task.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+  </ng-container>
 
 </div>
 
-<button class="task-list__add-task-btn" (click)="createTask()">Agregar tarea</button>
+
+<button class="task-list__btn--create-task" (click)="createTask()" mat-fab aria-label="Example icon button with a delete icon">
+  <mat-icon>add</mat-icon>
+</button>

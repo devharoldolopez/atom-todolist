@@ -22,42 +22,40 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 20;
   width: 70%;
+
+  &-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__btn-close{
+      background-color: $secondary-color;
+      width: 40px;
+      height: 40px;
+      border: solid 1px white;
+      border-radius: 5px;
+      color: white;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      &:hover{
+        background-color: $terciary-color;
+      }
+    }
+  }
+
+  &__form{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: start;
+    width: 100%;
+  }
+
 }
 
-.modal-header{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-
-}
-
-.modal-header__btn-close{
-  background-color: $secondary-color;
-  width: 40px;
-  height: 40px;
-  border: solid 1px white;
-  border-radius: 5px;
-  color: white;
-  font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-
-}
-
-.modal-header__btn-close:hover{
-  background-color: $terciary-color;
-
-}
-
-.modal__form{
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: start;
-  width: 100%;
-}
 
 .form-group{
   display: flex;
@@ -65,46 +63,46 @@
   align-items: start;
   width: 100%;
   margin-top:15px ;
+
+  &__item{
+    border-bottom: solid 1px $gray-color;
+    display: flex;
+    align-items:center;
+    width: 100%;
+    height: 40px;
+
+    & span{
+      color: $gray-color;
+      font-weight: 300;
+    }
+  }
+
+  & label{
+    width: 100%;
+  }
+
+  & input{
+    width: 100%;
+    padding-inline: unset;
+    padding-block: unset;
+    border: none;
+    height: 35px;
+    margin-left: 10px;
+
+    &:focus{
+      outline: none;
+    }
+
+    &::placeholder{
+      color: $gray-color;
+    }
+  }
 }
 
-.form-group__item{
-  border-bottom: solid 1px $gray-color;
-  display: flex;
-  align-items:center;
-  width: 100%;
-  height: 40px;
-}
 
-.form-group__item span{
-  color: $gray-color;
-  font-weight: 300;
-}
-
-.form-group label{
-  width: 100%;
-}
-
-.form-group input{
-  width: 100%;
-  padding-inline: unset;
-  padding-block: unset;
-  border: none;
-  height: 35px;
-  margin-left: 10px;
-
-}
-
-.form-group input:focus{
-  outline: none;
-}
-
-.form-group input::placeholder{
-  color: $gray-color;
-}
 
 .btn-primary{
   background: $primary-color;
-
   padding: 10px;
   width: 100%;
   font-size: 20px;
@@ -116,11 +114,12 @@
   margin-top: 30px;
   margin-bottom: 15px;
   cursor: pointer;
+
+  &:hover{
+    background-color: $terciary-color;
+  }
 }
 
-.btn-primary:hover{
-  background-color: $terciary-color;
-}
 
 
 
