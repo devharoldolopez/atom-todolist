@@ -1,6 +1,6 @@
 import {Request} from "express";
 
-export interface UserTask extends Request {
+export interface UserTaskRequest extends Request {
   query: {
     id: string;
   };

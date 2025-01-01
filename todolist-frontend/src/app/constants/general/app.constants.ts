@@ -3,6 +3,7 @@ export const CommonConstants = {
   EMPTY_OBJ_STR : '{}',
   EMPTY_STR: '',
   EMPTY_OBJ: null,
+  INITIAL_OBJ: {},
   EMPTY_TASK: null,
   FALSE_VALUE: false,
   TRUE_VALUE: true,
@@ -15,4 +16,7 @@ export const CommonConstants = {
   SUCCESS_RESPONSE: 'success',
   UPDATE_SUCCESSFUL_MSG: 'Tarea editada con éxito',
   INSERT_SUCCESSFUL_MSG: 'Tarea creada con éxito',
+  REGISTER_SUCCESSFUL_MSG: 'Se ha creado el usuario correctamente',
+  DELETE_TASK_SUCCESSFUL_MSG: 'Se ha eliminado la tarea',
+  UPDATE_STATE_TASK_SUCCESSFUL_MSG: 'Se ha cambiado el estado de la tarea',
 }

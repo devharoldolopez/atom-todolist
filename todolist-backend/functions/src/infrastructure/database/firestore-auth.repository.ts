@@ -4,7 +4,7 @@ import {FirebaseConfig} from "../config/firebase.config";
 import {ErrorService} from "../services/error.service";
 import {CommonConstants} from "../../constants/general/app.constants";
 import {UserErrorsConstants} from "../../constants/errors/user.constants";
-import {AuthRepository} from "../../app/auth/interfaces/auth.interface";
+import {AuthRepository} from "../../application/auth/interfaces/auth.interface";
 
 
 export class FirestoreAuthRepository implements AuthRepository {

@@ -1,0 +1,13 @@
+.custom-snackbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.snackbar-success-icon {
+  color: #4caf50;
+}
+
+.snackbar-error-icon {
+  color: red;
+}

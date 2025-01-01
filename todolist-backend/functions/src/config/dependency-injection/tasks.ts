@@ -1,6 +1,6 @@
-import {TasksUseCase} from "../../app/tasks/usecases/tasks.usecase";
-import {FirestoreTasksRepository} from "../../infra/database/tasks.repository";
-import {TasksController} from "../../infra/express/controllers/task.controller";
+import {TasksUseCase} from "../../application/tasks/usecases/tasks.usecase";
+import {FirestoreTasksRepository} from "../../infrastructure/database/firestore-tasks.repository";
+import {TasksController} from "../../infrastructure/express/controllers/task.controller";
 
 export function createTasksController(): TasksController {
   const tasksRepository = new FirestoreTasksRepository();

@@ -2,7 +2,7 @@ import * as logger from "firebase-functions/logger";
 import {FirebaseConfig} from "../config/firebase.config";
 import {CommonConstants} from "../../constants/general/app.constants";
 import {UserErrorsConstants} from "../../constants/errors/user.constants";
-import {TasksRepository} from "../../app/tasks/interfaces/tasks.interface";
+import {TasksRepository} from "../../application/tasks/interfaces/tasks.interface";
 import {Task} from "../../domain/tasks/tasks.entity";
 import {ErrorService} from "../services/error.service";
 

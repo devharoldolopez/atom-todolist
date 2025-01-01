@@ -1,10 +1,10 @@
 import {onRequest} from "firebase-functions/v2/https";
 import express from "express";
-import userRoute from "./infra/express/routes/user.route";
+import userRoute from "./infrastructure/express/routes/user.route";
 import {Assemblers} from "./config/dependency-injection";
-import {errorMiddleware} from "./infra/express/middlewares/error.middleware";
-import tasksRoute from "./infra/express/routes/tasks.route";
-import authRoute from "./infra/express/routes/auth.route";
+import {errorMiddleware} from "./infrastructure/express/middlewares/error.middleware";
+import tasksRoute from "./infrastructure/express/routes/tasks.route";
+import authRoute from "./infrastructure/express/routes/auth.route";
 import cors from "cors";
 
 

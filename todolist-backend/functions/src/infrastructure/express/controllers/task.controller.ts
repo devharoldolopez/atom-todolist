@@ -4,17 +4,17 @@ import * as logger from "firebase-functions/logger";
 
 import {ApiResponse} from "../../shared/api-response";
 import {CodeStatus} from "../../../constants/http/status.constants";
-import {TasksUseCase} from "../../../app/tasks/usecases/tasks.usecase";
+import {TasksUseCase} from "../../../application/tasks/usecases/tasks.usecase";
 import {Task} from "../../../domain/tasks/tasks.entity";
 import {ResponseConstants} from "../../../constants/http/response.constants";
 import {CommonConstants} from "../../../constants/general/app.constants";
-import {UserTask} from "../interfaces/user-task.interface";
+import {UserTaskRequest} from "../interfaces/user-task-request.interface";
 import {convertFirestoreTimestampToDate} from "../../utils/firestore-utils";
 
 export class TasksController {
   constructor(private readonly tasksUseCase: TasksUseCase) {}
 
-  async getTasksByUser(req: UserTask, res: Response, next: NextFunction) {
+  async getTasksByUser(req: UserTaskRequest, res: Response, next: NextFunction) {
     const userId:string = req.query.id;
     logger.info("Entro controller getTasksByUser: ", userId);
 

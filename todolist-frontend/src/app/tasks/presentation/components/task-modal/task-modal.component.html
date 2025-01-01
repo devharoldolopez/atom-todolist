@@ -11,6 +11,7 @@
       <div class="form-group__item">
         <input id="title" formControlName="title" />
       </div>
+      <app-error-message *ngIf="taskForm.get('title')?.touched" [control]="taskForm.get('title')"></app-error-message>
 
     </div>
 
@@ -20,6 +21,7 @@
         <input id="description" formControlName="description"/>
       </div>
     </div>
+    <app-error-message *ngIf="taskForm.get('description')?.touched" [control]="taskForm.get('description')"></app-error-message>
   
     <button class="btn-primary" type="submit" [disabled]="taskForm.invalid">Editar</button>
   </form>

@@ -1,7 +1,7 @@
 import {User} from "../../domain/users/user.entity";
 import * as logger from "firebase-functions/logger";
 import {FirebaseConfig} from "../config/firebase.config";
-import {UserRepository} from "../../app/users/interfaces/user.interface";
+import {UserRepository} from "../../application/users/interfaces/user.interface";
 import {ValidatorService} from "../services/validator.service";
 import {ErrorService} from "../services/error.service";
 import {CommonConstants} from "../../constants/general/app.constants";

@@ -1,13 +1,13 @@
 import {Response, Router, Request} from "express";
 import {TasksController} from "../controllers/task.controller";
-import {UserTask} from "../interfaces/user-task.interface";
+import {UserTaskRequest} from "../interfaces/user-task-request.interface";
 
 export default function tasksRoute(tasksController: TasksController): Router {
   const router = Router();
 
   router.get(
     "/",
-    (req: UserTask, res: Response, next) =>
+    (req: UserTaskRequest, res: Response, next) =>
       tasksController.getTasksByUser(req, res, next)
   );
   router.post("/",

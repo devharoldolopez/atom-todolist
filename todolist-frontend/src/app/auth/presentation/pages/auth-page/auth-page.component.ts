@@ -12,6 +12,10 @@ import { UserErrorsConstants } from '../../../../constants/errors/user-errors.co
 import { User } from '../../../domain/entities/user';
 import { CommonConstants } from '../../../../constants/general/app.constants';
 import { FormLogService } from '../../../../shared/services/form-log.service';
+import { LoadingService } from '../../../../shared/services/loading.service';
+import { finalize } from 'rxjs';
+import { NotificationService } from '../../../../shared/services/notification.service';
+import { NotificationError } from '../../../../constants/errors/notification-errors.constants';
 
 
 @Component({
@@ -31,17 +35,22 @@ export class AuthPageComponent {
     private router: Router,
     private modalService: ModalService<User>,
     private formLogService: FormLogService,
+    private loadingService: LoadingService,
+    private notificationService: NotificationService
   ){
     this.userForm = this.createUserForm();
   }
 
   private createUserForm(): FormGroup {
     return this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]]
+      email: [CommonConstants.EMPTY_STR, [Validators.required, Validators.email]]
     });
   }
 
   onSubmit():void {
+
+    this.loadingService.show()
+
     if(this.userForm.invalid){
       this.formLogService.logValidationErrors(this.userForm);
       return;
@@ -51,6 +60,11 @@ export class AuthPageComponent {
 
     const credentials = this.userForm.value;
     this.userAuthUseCase.doLogin(credentials)
+      .pipe(
+        finalize(() => {
+          this.loadingService.hide()
+        })
+      )
       .subscribe({
         next: (user) => {
           this.userAuthUseCase.setLocalUserAuth(user);
@@ -58,10 +72,12 @@ export class AuthPageComponent {
         },
         error: (authError:HttpErrorResponse) => {
           console.log("Error en el login:", authError.error);
-          if(authError.error.details.internalCode === UserErrorsConstants.USER_NOT_FOUND_EMAIL.internalCode)
+          if(authError.error.details && authError.error.details.internalCode === UserErrorsConstants.USER_NOT_FOUND_EMAIL.internalCode
+          ){
             this.modalService.open(CommonConstants.EMPTY_OBJ);
-          else
-            console.log("Error en el login: ", authError.error.message);
+          } else{
+            this.notificationService.error(NotificationError.GENERAL_ERROR)
+          }
         }
       });
 

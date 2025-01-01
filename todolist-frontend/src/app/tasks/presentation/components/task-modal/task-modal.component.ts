@@ -9,12 +9,16 @@ import { filter, finalize, map, Observable } from 'rxjs';
 import { Task } from '../../../domain/entities/task';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserAuthUseCase } from '../../../../auth/application/use-cases/user-auth-use-case';
+import { NotificationService } from '../../../../shared/services/notification.service';
+import { NotificationError } from '../../../../constants/errors/notification-errors.constants';
+import { LoadingService } from '../../../../shared/services/loading.service';
+import { ErrorMessageComponent } from '../../../../auth/presentation/components/error-message/error-message.component';
 
 
 @Component({
   selector: 'app-task-modal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ErrorMessageComponent],
   templateUrl: './task-modal.component.html',
   styleUrl: './task-modal.component.scss'
 })
@@ -32,7 +36,9 @@ export class TaskModalComponent implements OnInit{
     private modalService: ModalService<Task>,
     private formLogService: FormLogService,
     private taskUseCase: TasksUseCase,
-    private userAuthUseCase: UserAuthUseCase
+    private userAuthUseCase: UserAuthUseCase,
+    private notificationService: NotificationService,
+    private loadingService : LoadingService
   ){
     this.taskForm = this.createAuthRegisterForm();
     this.currentEditTask = Task.getEmptyTask();
@@ -59,8 +65,13 @@ export class TaskModalComponent implements OnInit{
   }
 
   onSubmit():void {
+    
+    this.loadingService.show();
+
     if(this.taskForm.invalid){
       this.formLogService.logValidationErrors(this.taskForm);
+      this.loadingService.hide();
+      this.notificationService.error(NotificationError.VALIDATION_TASK_ERROR)
       return;
     }
 
@@ -71,21 +82,26 @@ export class TaskModalComponent implements OnInit{
     handledTask.pipe(
       finalize(() => {
         this.modalService.close();
+        this.loadingService.hide();
         this.currentEditTask = Task.getEmptyTask();
         this.isEdited = CommonConstants.FALSE_VALUE;
+        this.loadingService.hide();
       })
     )
     .subscribe({
       next: (task: Task) => {
         console.log("Is editing: ",this.isEdited);
         console.log("Task actualizada: ", task);
-        this.finishAction.emit(this.isEdited ? 
+
+        const msgTask = this.isEdited ? 
           CommonConstants.UPDATE_SUCCESSFUL_MSG :
-          CommonConstants.INSERT_SUCCESSFUL_MSG
-        );
+          CommonConstants.INSERT_SUCCESSFUL_MSG;
+
+        this.finishAction.emit(msgTask);
       },
       error: (taskError:HttpErrorResponse) => {
         console.log("Error en el modal task:", taskError);
+        this.notificationService.error(NotificationError.GENERAL_ERROR)
       }
     });
   }

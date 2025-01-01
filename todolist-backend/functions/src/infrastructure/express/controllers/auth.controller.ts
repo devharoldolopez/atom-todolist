@@ -1,5 +1,5 @@
 import {NextFunction, Request, Response} from "express";
-import {AuthUseCase} from "../../../app/auth/usecases/auth.usecase";
+import {AuthUseCase} from "../../../application/auth/usecases/auth.usecase";
 import * as logger from "firebase-functions/logger";
 import {CodeStatus} from "../../../constants/http/status.constants";
 import {ApiResponse} from "../../shared/api-response";

@@ -2,7 +2,7 @@ import {NextFunction, Request, Response} from "express";
 
 import * as logger from "firebase-functions/logger";
 import {User} from "../../../domain/users/user.entity";
-import {UsersUseCase} from "../../../app/users/usecases/users.usecase";
+import {UsersUseCase} from "../../../application/users/usecases/users.usecase";
 import {ApiResponse} from "../../shared/api-response";
 import {CodeStatus} from "../../../constants/http/status.constants";
 import {ResponseConstants} from "../../../constants/http/response.constants";

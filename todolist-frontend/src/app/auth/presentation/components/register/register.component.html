@@ -12,6 +12,7 @@
         <mat-icon>mail</mat-icon>
         <input id="email" type="email" formControlName="email" placeholder="Escribe tu correo electrónico" />
       </div>
+      <app-error-message *ngIf="authRegisterForm.get('email')?.touched" [control]="authRegisterForm.get('email')"></app-error-message>
 
     </div>
 
@@ -21,6 +22,7 @@
         <mat-icon>person</mat-icon>
         <input id="username" formControlName="username" placeholder="Escribe tu nombre de usuario"/>
       </div>
+      <app-error-message *ngIf="authRegisterForm.get('username')?.touched" [control]="authRegisterForm.get('username')"></app-error-message>
 
     </div>
   
