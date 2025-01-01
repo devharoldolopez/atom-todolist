@@ -71,7 +71,8 @@ export class TaskPageComponent implements OnInit {
         },
         error: (error) => {
           console.log("Error al obtener las tareas: ", error);
-          this.notificationService.error(NotificationError.GET_TASKS_ERROR)
+          this.taskListCompleted = CommonConstants.EMPTY_ARRAY
+          this.taskListPending = CommonConstants.EMPTY_ARRAY
         }
       });
   }

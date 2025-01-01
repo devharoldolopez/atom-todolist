@@ -1,3 +1,5 @@
+@import 'styles/variables';
+
 .custom-snackbar {
   display: flex;
   align-items: center;
@@ -9,5 +11,5 @@
 }
 
 .snackbar-error-icon {
-  color: red;
+  color: $accent-color;
 }

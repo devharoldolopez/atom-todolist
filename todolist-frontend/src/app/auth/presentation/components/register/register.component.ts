@@ -13,6 +13,7 @@ import { NotificationService } from '../../../../shared/services/notification.se
 import { NotificationError } from '../../../../constants/errors/notification-errors.constants';
 import { CommonConstants } from '../../../../constants/general/app.constants';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
+import { UserErrorsConstants } from '../../../../constants/errors/user-errors.constants';
 
 @Component({
   selector: 'app-register',
@@ -55,25 +56,25 @@ export class RegisterComponent {
       return;
     }
     this.userAuthUseCase.registerUser(this.authRegisterForm.value)
-      .pipe(
-        finalize(() => {
-          this.modalService.close();
-        })
-      )
       .subscribe({
         next: (user) => {
-
           console.log("Usuario registrado register cmp: ", user);
-
           this.userAuthUseCase.setLocalUserAuth(user);
           this.authRegisterForm.reset();
           this.notificationService.info(CommonConstants.REGISTER_SUCCESSFUL_MSG)
+          this.modalService.close();
           this.router.navigate(['/tasks']);
         },
         error: (authError:HttpErrorResponse) => {
           console.log("Error en el login:", authError);
-          this.router.navigate(['/auth/login']);
-          this.notificationService.error(NotificationError.GENERAL_ERROR)
+          if(authError.error.details &&
+            authError.error.details.internalCode == UserErrorsConstants.EMAIL_ALREADY_EXISTS.internalCode
+          ){
+            this.notificationService.error(UserErrorsConstants.EMAIL_ALREADY_EXISTS.msg)
+          }else{
+            this.router.navigate(['/auth/login']);
+            this.notificationService.error(NotificationError.GENERAL_ERROR)
+          }
         }
       });
   }

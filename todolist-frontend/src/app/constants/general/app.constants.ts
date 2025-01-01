@@ -3,6 +3,7 @@ export const CommonConstants = {
   EMPTY_OBJ_STR : '{}',
   EMPTY_STR: '',
   EMPTY_OBJ: null,
+  EMPTY_ARRAY: [],
   INITIAL_OBJ: {},
   EMPTY_TASK: null,
   FALSE_VALUE: false,

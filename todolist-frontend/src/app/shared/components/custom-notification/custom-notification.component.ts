@@ -16,7 +16,6 @@ export class CustomNotificationComponent {
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: NotificationMessage){}
 
   evaluateIcon(type:NotificationType|undefined){
-    console.log("typo noti: ", type);
     return type === NotificationType.INFO ?
       'snackbar-success-icon':
       'snackbar-error-icon'

@@ -53,6 +53,8 @@ export class TaskModalComponent implements OnInit{
 
         this.currentEditTask = modalData.data || Task.getEmptyTask();
 
+        this.taskForm.reset();
+
         this.taskForm.patchValue({
           title: modalData.data?.title || CommonConstants.EMPTY_STR,
           description: modalData.data?.description || CommonConstants.EMPTY_STR

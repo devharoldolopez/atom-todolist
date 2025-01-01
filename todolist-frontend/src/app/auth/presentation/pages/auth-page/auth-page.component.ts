@@ -72,7 +72,8 @@ export class AuthPageComponent {
         },
         error: (authError:HttpErrorResponse) => {
           console.log("Error en el login:", authError.error);
-          if(authError.error.details && authError.error.details.internalCode === UserErrorsConstants.USER_NOT_FOUND_EMAIL.internalCode
+          if(authError.error.details &&
+            authError.error.details.internalCode === UserErrorsConstants.USER_NOT_FOUND_EMAIL.internalCode
           ){
             this.modalService.open(CommonConstants.EMPTY_OBJ);
           } else{

@@ -46,7 +46,7 @@ body { margin: 0; font-family: "Quicksand", serif; }
 html, body { height: 100%; }
 body { margin: 0; font-family: "Quicksand", serif; color: $black-color; }
 
-// .mat-mdc-snack-bar-container {
-//   --mdc-snackbar-container-color: red;
-//   --mat-snack-bar-button-color: White;
-// }
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: #3C3744;
+  --mat-snack-bar-button-color: White;
+}
