@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_SNACK_BAR_DATA, MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Component, OnInit } from '@angular/core';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { NotificationService } from '../../services/notification.service';
 import { NotificationMessage } from '../../interfaces/notification-message.interface';
 import { CommonConstants } from '../../../constants/general/app.constants';
@@ -25,25 +25,27 @@ export class NotificationComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.notification$.subscribe((notification:NotificationMessage)=>{
+    this.notification$.subscribe({
+      next: (notification:NotificationMessage)=>{
       
-      if (notification === CommonConstants.INITIAL_OBJ) {
-        return;
+        if (notification === CommonConstants.INITIAL_OBJ) {
+          return;
+        }
+  
+        const notificationClass = notification.type == NotificationType.INFO ?
+          'success-snackbar' : 'error-snackbar'
+  
+        this.notificationBar.openFromComponent(CustomNotificationComponent,{
+          data:{
+            msg: notification.msg || CommonConstants.EMPTY_STR,
+            type: notification.type
+          },
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: [notificationClass]
+        })
       }
-
-      const notificationClass = notification.type == NotificationType.INFO ?
-        'success-snackbar' : 'error-snackbar'
-
-      this.notificationBar.openFromComponent(CustomNotificationComponent,{
-        data:{
-          msg: notification.msg || CommonConstants.EMPTY_STR,
-          type: notification.type
-        },
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-        panelClass: [notificationClass]
-      })
     })
   }
   

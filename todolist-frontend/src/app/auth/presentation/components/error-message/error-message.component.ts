@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { CommonConstants } from '../../../../constants/general/app.constants';
 
 @Component({
   selector: 'app-error-message',
@@ -19,7 +20,7 @@ export class ErrorMessageComponent {
     if(errors['required']) return "El campo es requerido";
     if(errors['email']) return "Email inválido";
 
-    return "Campo inválido";
+    return CommonConstants.INVALID_FIELD;
   }
 
 }

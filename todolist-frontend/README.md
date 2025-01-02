@@ -1,36 +1,133 @@
-# ATOM FE CHALLENGE TEMPLATE - ANGULAR
+# Atom To-Do List Frontend
 
-Este proyecto es una plantilla con lo necesario para comenzar a desarrollar el front-end de la aplicación de la prueba técnica de Atom. Se base en Angular con la versión 17.3.6.
-Se ha realizado la instalación y configuración de varias dependencias necesarias para el desarrollo de la aplicación, como por ejemplo: Angular Material.
+## Descripción
 
-## Instrucciones
-Siéntete libre de clonar este repositorio y utilizarlo como base para el desarrollo de la aplicación. Sigue las indicates de la prueba técnica para completar la aplicación y desarrolla como más te sientas cómodo.
+Este proyecto es una aplicación frontend desarrollada en **Angular 17**, organizada utilizando principios de **Clean Architecture** y haciendo uso de **Componentes Standalone** para promover la modularidad, mantenibilidad y reutilización del código. La aplicación gestiona tareas mediante una arquitectura bien definida que utiliza **gateways como consumidores de API REST**.
 
-De igual manera puedes documentar dentro de este archivo todo lo que deseas contar sobre tu desarrollo, como por ejemplo, decisiones de diseño, problemas encontrados, etc.
+## Organización del Proyecto
 
-## Comentarios sobre el desarrollo
-...
+El proyecto sigue una estructura modular y separa las responsabilidades en capas bien definidas:
 
-## Development server
+### 1. **Capa de Presentación (Presentation Layer)**
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Esta capa incluye los componentes y páginas que interactúan directamente con el usuario. Está diseñada para ser reutilizable y accesible.
 
-## Code scaffolding
+- **Componentes:** 
+  - **ErrorMessageComponent:** Muestra mensajes de error personalizados.
+  - **CustomNotificationComponent:** Notificaciones adaptables para el usuario.
+  - **TaskModalComponent:** Modal para la creación y edición de tareas.
+  - **LoadingComponent:** Indicador reutilizable para procesos en ejecución.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Páginas:** 
+  - **AuthPage:** Página dedicada a la autenticación.
+  - **TaskPage:** Página principal para gestionar tareas.
 
-## Build
+### 2. **Capa de Aplicación (Application Layer)**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Define la lógica principal de la aplicación mediante casos de uso. Esta capa actúa como intermediaria entre la capa de presentación y el dominio.
 
-## Running unit tests
+- **Guards:**
+  - `AuthGuard:` Protege rutas restringidas a usuarios autenticados.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Casos de Uso:**
+  - **Auth:**
+    - `CheckUserStatusUseCase`: Valida el estado del usuario.
+    - `UserAuthUseCase`: Maneja procesos de autenticación.
+  - **Tasks:**
+    - `TasksUseCase`: Implementa operaciones relacionadas con tareas.
 
-## Running end-to-end tests
+### 3. **Capa de Dominio (Domain Layer)**
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Incluye las entidades, interfaces y reglas de negocio que definen la aplicación.
 
-## Further help
+- **Entidades:**
+  - **User:** Representa a un usuario con sus propiedades esenciales.
+  - **Task:** Describe las tareas con sus características principales.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- **Interfaces:**
+  - **AuthGateway:** Define las operaciones necesarias para autenticación.
+  - **TaskGateway:** Establece las operaciones para la gestión de tareas.
+
+### 4. **Capa de Infraestructura (Infrastructure Layer)**
+
+Implementa la interacción con recursos externos como APIs REST. Utiliza **gateways** para encapsular las operaciones necesarias, manteniendo desacopladas las demás capas.
+
+- **Gateways como Consumidores de API REST:**
+  - **AuthApiService:** Maneja las peticiones REST relacionadas con la autenticación de usuarios, como el inicio de sesión y registro.
+  - **TaskApiService:** Administra las operaciones de tareas mediante peticiones REST, como la creación, edición y eliminación.
+
+- **Configuración:**
+  - `auth-endpoints.config.ts`: Contiene los endpoints de la API para autenticación.
+  - `task-endpoints.config.ts`: Define los endpoints para la gestión de tareas.
+
+- **Utilidades:**
+  - `error.service.impl.ts`: Centraliza el manejo de errores.
+  - `local-storage.util.ts`: Proporciona funciones para interactuar con el almacenamiento local.
+
+### 5. **Capa Compartida (Shared Layer)**
+
+La capa compartida contiene recursos reutilizables como servicios, pipes y componentes auxiliares.
+
+- **Componentes Compartidos:**
+  - **LoadingComponent:** Indicador de carga reutilizable.
+  - **NotificationComponent:** Gestión de notificaciones visuales.
+
+- **Servicios Compartidos:**
+  - `NotificationService`: Notificaciones centralizadas.
+  - `LoadingService`: Control de indicadores de carga.
+  - `ModalService`: Manejo dinámico de modales.
+
+- **Pipes:**
+  - `FormatDatePipe`: Formatea fechas para su visualización.
+
+- **Constantes:**
+  - `AppConstants`: Configuraciones generales.
+  - `UserErrorsConstants`: Mensajes de error comunes.
+
+### 6. **Entornos**
+
+El proyecto soporta múltiples configuraciones para entornos de desarrollo, pruebas y producción.
+
+- **Archivos de Configuración:**
+  - `environment.ts`: Configuración para desarrollo.
+  - `environment.prod.ts`: Configuración para producción.
+  - `environment.staging.ts`: Configuración para staging.
+
+### 7. **Estilos**
+
+Utiliza SCSS para la personalización y mantiene variables globales definidas en `_variables.scss` para facilitar la consistencia de diseño.
+
+---
+
+## Instalación y Uso
+
+### 1. Clonar el repositorio
+```bash
+git clone https://github.com/devharoldolopez/atom-todolist.git
+cd todolist-frontend
+```
+
+### 2. Instalar dependencias
+```bash
+npm install
+```
+
+### 3. Ejecutar el servidor de desarrollo
+```bash
+ng serve
+```
+
+### 4. Compilar para producción
+```bash
+ng build --configuration production
+```
+
+---
+
+## Buenas Prácticas Aplicadas
+
+1. **Separation of Concerns:** Cada capa tiene responsabilidades específicas.
+2. **Reutilización:** Servicios y componentes compartidos para evitar redundancia.
+3. **Desacoplamiento:** Uso de interfaces y gateways para aislar las capas.
+4. **Escalabilidad:** Arquitectura modular para soportar futuras expansiones.
+5. **Manejo de errores:** Centralizado mediante servicios dedicados.

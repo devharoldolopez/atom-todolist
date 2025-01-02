@@ -30,12 +30,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "src/styles/_variables.scss"
+              "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src"
+                "src",
+                "src/styles"
               ]
             },
             "scripts": []
@@ -123,8 +123,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/styles/_variables.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "scripts": []
           }
         },

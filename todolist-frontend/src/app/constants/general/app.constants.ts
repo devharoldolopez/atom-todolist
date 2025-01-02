@@ -23,4 +23,5 @@ export const CommonConstants = {
   REGISTER_SUCCESSFUL_MSG: 'Se ha creado el usuario correctamente',
   DELETE_TASK_SUCCESSFUL_MSG: 'Se ha eliminado la tarea',
   UPDATE_STATE_TASK_SUCCESSFUL_MSG: 'Se ha cambiado el estado de la tarea',
+  INVALID_FIELD: 'Campo inválido',
 }

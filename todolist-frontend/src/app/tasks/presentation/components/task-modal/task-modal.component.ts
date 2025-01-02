@@ -49,16 +49,18 @@ export class TaskModalComponent implements OnInit{
       .pipe(
         filter(modalData => modalData.visible)
       )
-      .subscribe((modalData) => {
+      .subscribe({
+        next: (modalData) => {
 
-        this.currentEditTask = modalData.data || Task.getEmptyTask();
-
-        this.taskForm.reset();
-
-        this.taskForm.patchValue({
-          title: modalData.data?.title || CommonConstants.EMPTY_STR,
-          description: modalData.data?.description || CommonConstants.EMPTY_STR
-        })
+          this.currentEditTask = modalData.data || Task.getEmptyTask();
+  
+          this.taskForm.reset();
+  
+          this.taskForm.patchValue({
+            title: modalData.data?.title || CommonConstants.EMPTY_STR,
+            description: modalData.data?.description || CommonConstants.EMPTY_STR
+          })
+        }
       });
   }
 
@@ -89,8 +91,7 @@ export class TaskModalComponent implements OnInit{
         this.isEdited = CommonConstants.FALSE_VALUE;
         this.loadingService.hide();
       })
-    )
-    .subscribe({
+    ).subscribe({
       next: (task: Task) => {
         console.log("Is editing: ",this.isEdited);
         console.log("Task actualizada: ", task);

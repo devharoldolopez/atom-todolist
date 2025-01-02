@@ -35,7 +35,7 @@ $todolist-frontend-theme: mat.define-light-theme((
 // that you are using.
 @include mat.all-component-themes($todolist-frontend-theme);
 
-@import 'styles/variables';
+@import 'variables';
 
 $primary-color: #8AA4E8;
 

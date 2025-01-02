@@ -63,18 +63,17 @@ export class TaskPageComponent implements OnInit {
       finalize(() => {
         this.loadingService.hide()
       })
-    )
-      .subscribe({
-        next: (tasks:Task[]) => {
-          this.taskListCompleted = tasks.filter(task => task.state === CommonConstants.STATE_COMPLETED)
-          this.taskListPending = tasks.filter(task => task.state === CommonConstants.STATE_PENDING)
-        },
-        error: (error) => {
-          console.log("Error al obtener las tareas: ", error);
-          this.taskListCompleted = CommonConstants.EMPTY_ARRAY
-          this.taskListPending = CommonConstants.EMPTY_ARRAY
-        }
-      });
+    ).subscribe({
+      next: (tasks:Task[]) => {
+        this.taskListCompleted = tasks.filter(task => task.state === CommonConstants.STATE_COMPLETED)
+        this.taskListPending = tasks.filter(task => task.state === CommonConstants.STATE_PENDING)
+      },
+      error: (error) => {
+        console.log("Error al obtener las tareas: ", error);
+        this.taskListCompleted = CommonConstants.EMPTY_ARRAY
+        this.taskListPending = CommonConstants.EMPTY_ARRAY
+      }
+    });
   }
 
   finishAction(message:string){
@@ -125,10 +124,12 @@ export class TaskPageComponent implements OnInit {
           this.loadingService.hide()
         })
       )
-      .subscribe((task:Task) => {
-        console.log("Tarea editada estado: ", task);
-        this.notificationService.info(CommonConstants.UPDATE_STATE_TASK_SUCCESSFUL_MSG)
-        this.renderTasks();
+      .subscribe({
+        next: (task:Task) => {
+          console.log("Tarea editada estado: ", task);
+          this.notificationService.info(CommonConstants.UPDATE_STATE_TASK_SUCCESSFUL_MSG)
+          this.renderTasks();
+        }
       })
   }
 

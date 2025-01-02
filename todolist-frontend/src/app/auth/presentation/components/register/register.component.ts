@@ -14,6 +14,7 @@ import { NotificationError } from '../../../../constants/errors/notification-err
 import { CommonConstants } from '../../../../constants/general/app.constants';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { UserErrorsConstants } from '../../../../constants/errors/user-errors.constants';
+import { LoadingService } from '../../../../shared/services/loading.service';
 
 @Component({
   selector: 'app-register',
@@ -32,7 +33,8 @@ export class RegisterComponent {
     private userAuthUseCase: UserAuthUseCase,
     private formLogService: FormLogService,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private loadingService: LoadingService
   ){
     this.authRegisterForm = this.createAuthRegisterForm();
   }
@@ -50,12 +52,20 @@ export class RegisterComponent {
   }
 
   onSubmit():void {
+
+    this.loadingService.show();
+
     if(this.authRegisterForm.invalid){
       this.formLogService.logValidationErrors(this.authRegisterForm);
       this.notificationService.error(NotificationError.FORM_VALIDATION_ERROR)
       return;
     }
     this.userAuthUseCase.registerUser(this.authRegisterForm.value)
+      .pipe(
+        finalize(() => {
+          this.loadingService.hide()
+        })
+      )
       .subscribe({
         next: (user) => {
           console.log("Usuario registrado register cmp: ", user);
