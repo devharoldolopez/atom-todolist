@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "2da9f825-18eb-40c3-9716-a625d898ad31",
+		"name": "AtomChallenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20801606"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Haroldo\",\n    \"email\": \"devharoldo@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_SERVICE}}/api/users/fARNm23vaKxBIRBBfX5s",
+							"host": [
+								"{{URL_SERVICE}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"fARNm23vaKxBIRBBfX5s"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"User Test\",\n    \"email\": \"test@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_SERVICE}}/api/users",
+							"host": [
+								"{{URL_SERVICE}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL_SERVICE}}/api/users/kQISdsimTUaq6y7WfYtO",
+							"host": [
+								"{{URL_SERVICE}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"kQISdsimTUaq6y7WfYtO"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_SERVICE}}/api/users",
+							"host": [
+								"{{URL_SERVICE}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tasks",
+			"item": [
+				{
+					"name": "Insert new task",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"JkihkVhOBk0xdtvoma1I\",\n    \"title\": \"NUEVA TAREA 3\",\n    \"description\": \"tarea descript 3\",\n    \"state\": \"PENDING\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_SERVICE}}/api/tasks",
+							"host": [
+								"{{URL_SERVICE}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Task by user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_SERVICE}}/api/tasks/?id=Cr0TD8aBDNgJHR0mp38N",
+							"host": [
+								"{{URL_SERVICE}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "Cr0TD8aBDNgJHR0mp38N"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update task",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"NUEVA TAREA 2\",\n    \"description\": \"tarea descript\",\n    \"state\": \"COMPLETED\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_SERVICE}}/api/tasks/qrCY9fo3ebbl7JYbkmlU",
+							"host": [
+								"{{URL_SERVICE}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"qrCY9fo3ebbl7JYbkmlU"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete task",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL_SERVICE}}/api/tasks/BbsVZX9eDhznZN8Z0ZwY",
+							"host": [
+								"{{URL_SERVICE}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"BbsVZX9eDhznZN8Z0ZwY"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Do login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"dd@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_SERVICE}}/api/auth/login",
+							"host": [
+								"{{URL_SERVICE}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
